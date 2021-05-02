@@ -1,89 +1,44 @@
-<!--
+<?php $title = "Login"; ?>
+@extends("auth.master")
 
-=========================================================
-* Now UI Dashboard - v1.5.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset("admin-assets/img/apple-icon.png")}}">
-    <link rel="icon" type="image/png" href="{{asset("admin-assets/img/favicon.png")}}">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Login</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!-- CSS Files -->
-    <link href="{{asset("admin-assets/css/bootstrap.min.css")}}" rel="stylesheet"/>
-    <link href="{{asset("admin-assets/css/now-ui-dashboard.css?v=1.5.0")}}" rel="stylesheet"/>
-
-    <style>
-        .wrapper, .content {
-            display: flex;
-        }
-
-        .wrapper {
-            width:           100vw;
-            height:          100vh;
-/*background: gredient();*/
-            /*background: #1b395c;*/
-            justify-content: center;
-            align-items:     center;
-        }
-
-        .content {
-            padding:       25px;
-            border-radius: 15px;
-            /*background:      var(--orange) !important;*/
-            /*margin:        auto;*/
-            border:        1px solid #fff;
-            background:    #fff !important;
-        }
-    </style>
-</head>
-<body class="">
-<div class="wrapper panel-header">
-    <div class="content ">
-        <form action="{{route('login')}}" method="post">
-            @csrf
-            <div class="form-group no-border">
-                <label for="email">Email</label>
-                <input id="email" type="text" name="email" class="form-control {{ $errors->has('email') ? "is-invalid" : "" }}" value="{{ old('email') }}" placeholder="Email">
-                @if($errors->has('email'))
-                    <strong class="invalid-feedback">{{ $errors->first('email') }}</strong>
-                @endif
-            </div>
-            <div class="form-group no-border">
-                <label for="password">Password</label>
-                <input id="password" type="password" name="password" class="form-control {{ $errors->has('password') ? "is-invalid" : "" }}" value="{{ old('password') }}" placeholder="Password">
-                @if($errors->has('password'))
-                    <strong class="invalid-feedback">{{ $errors->first('password') }}</strong>
-                @endif
-            </div>
-
-                <div class="text-right form-group">
-                    <button class="btn btn-sm btn-block btn-primary">Login</button>
+@section('content')
+    <section class="w3l-login">
+        <div class="w3l-form-36-mian">
+            <div class="container">
+                <div class="logo text-center">
+                    <a class="brand-logo" href="{{route('welcome')}}"><img src="{{asset("assets/images/logo-icon.png")}}" alt="" />Skill</a>
+                    <!-- if logo is image enable this
+                            <a class="brand-logo" href="#index.html">
+                              <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                            </a> -->
                 </div>
-                <div class="form-group">
-                    Looking to <a href="{{route('register')}}">create an account </a>?
-                </div>
+                <div class="form-inner-cont">
+                    <h3>Login</h3>
+                    <h6>To continue with Us</h6>
+                    <form action="{{route('login')}}" method="post" class="signin-form">
+                        @csrf
+                        <div class="form-input">
+                            <input type="email" name="email" placeholder="Email address or username" required="" autofocus>
+                        </div>
+                        <div class="form-input">
+                            <input type="password" name="password" placeholder="Password" required="">
+                        </div>
+                        <label class="check-remaind">
+                            <input type="checkbox" name="remember">
+                            <span class="checkmark"></span>
+                            <p class="remember">Remember me</p>
 
-        </form>
-    </div>
-</div>
-</body>
-</html>
+                        </label>
+
+                        <button type="submit" class="btn btn-primary theme-button mt-4">Log in</button>
+{{--                        <div class="new-signup">--}}
+{{--                            <a href="#reload" class="signuplink">Forgot username or password?</a>--}}
+
+{{--                        </div>--}}
+                    </form>
+                    <p class="signup">Don’t have account yet? <a href="{{route('register')}}" class="signuplink">Get it now</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
