@@ -14,8 +14,8 @@
                                 </h3>
                                 <p class="my-4 mb-sm-5">We believe everyone has the capacity to be creative. Skill is a place where people develop their own potential.
                                 </p><br>
-                                <a href="signup.html" class="btn btn-primary theme-button mr-3">Become a Teacher</a>
-                                <a href="courses.html" class="btn btn-outline-primary theme-button">Courses</a>
+                                <a href="{{route('register')}}?teacher=1" class="btn btn-primary theme-button mr-3">Become a Teacher</a>
+                                <a href="{{route('courses')}}" class="btn btn-outline-primary theme-button">Courses</a>
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                     <h3>How we Teach?</h3>
                     <p class="mt-3 mb-5">We amplify important ideas in mathematics education to help teachers grow their practice and our profession.
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim beatae, facilis voluptatibus repellendus totam autem?</p>
-                    <a href="signup.html" class="btn btn-primary theme-button">Join our Community</a>
+                    <a href="{{'register'}}" class="btn btn-primary theme-button">Join our Community</a>
                 </div>
                 <div class="list-single-view mt-5">
                     <div class="row">
@@ -229,7 +229,7 @@
                     </div>
                     <div class="link-list-menu">
                         <p class="mb-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae sapiente facere amet quas quae, inventore, dolore modi, delectus illum velit magni quod blanditiis nam quasi perspiciatis. Quod cupiditate eum sit!</p>
-                        <a href="about.html" class="btn btn-outline-light btn-more">About Us</a>
+                        <a href="{{route('about')}}" class="btn btn-outline-light btn-more">About Us</a>
                     </div>
                 </div>
             </div>

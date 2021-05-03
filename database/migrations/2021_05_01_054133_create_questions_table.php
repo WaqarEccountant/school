@@ -6,18 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateQuestionsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up () {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('body');
-            $table->enum('type',['objective','subjective']);
+            $table->enum('type', ['objective', 'subjective']);
             $table->text('answer')->nullable();
+            $table->string('q_image')->nullable();
+            $table->string('a_image')->nullable();
             $table->unsignedBigInteger('option_id');
             $table->unsignedBigInteger('exam_id');
             $table->timestamps();
@@ -29,8 +31,9 @@ class CreateQuestionsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down () {
         Schema::dropIfExists('questions');
     }
+
+
 }

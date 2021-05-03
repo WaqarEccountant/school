@@ -6,7 +6,7 @@
         <div class="w3l-form-36-mian">
             <div class="container">
                 <div class="logo text-center">
-                    <a class="brand-logo" href="{{route('welcome')}}"><img src="{{asset("assets/images/logo-icon.png")}}" alt="" />Skill</a>
+                    <a class="brand-logo" href="{{route('welcome')}}"><img src="{{asset("assets/images/logo-icon.png")}}" alt=""/>Skill</a>
                     <!-- if logo is image enable this
                             <a class="brand-logo" href="#index.html">
                               <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -15,6 +15,15 @@
                 <div class="form-inner-cont">
                     <h3>Login</h3>
                     <h6>To continue with Us</h6>
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="{{route('login')}}" method="post" class="signin-form">
                         @csrf
                         <div class="form-input">
@@ -31,10 +40,10 @@
                         </label>
 
                         <button type="submit" class="btn btn-primary theme-button mt-4">Log in</button>
-{{--                        <div class="new-signup">--}}
-{{--                            <a href="#reload" class="signuplink">Forgot username or password?</a>--}}
+                        {{--                        <div class="new-signup">--}}
+                        {{--                            <a href="#reload" class="signuplink">Forgot username or password?</a>--}}
 
-{{--                        </div>--}}
+                        {{--                        </div>--}}
                     </form>
                     <p class="signup">Don’t have account yet? <a href="{{route('register')}}" class="signuplink">Get it now</a></p>
                 </div>

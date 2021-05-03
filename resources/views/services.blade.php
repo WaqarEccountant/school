@@ -30,7 +30,7 @@
                         <li>Apply for Scholarship</li>
                     </ul>
 
-                    <a href="contact.html" class="btn btn-outline-secondary theme-button">Know More</a>
+                    <a href="{{route('contact')}}" class="btn btn-outline-secondary theme-button">Know More</a>
                 </div>
             </div>
         </div>

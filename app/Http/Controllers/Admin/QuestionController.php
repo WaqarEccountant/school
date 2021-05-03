@@ -17,7 +17,18 @@ class QuestionController extends Controller
     public function store (Request $request) {
         $exam_id = $request->get('exam_id');
         $result = Question::addUpdate($request->all(), $exam_id);
+
+
         if ($result) {
+            if ($request->hasFile('q_image')) {
+                $result->q_image = upload_file('q_image');
+            }
+            if ($request->hasFile('a_image')) {
+                $result->a_image = upload_file('a_image');
+            }
+
+            $result->save();
+
             $options = $request->get('option', []);
             if ($result->type == 'objective' && count($options)) {
 

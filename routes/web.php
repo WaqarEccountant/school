@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\SubjectController as AdminSubjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Student\HomeController as StudentHomeController;
 use App\Http\Controllers\Teacher\ExamController;
 use App\Http\Controllers\Teacher\ExamTypeController;
 use App\Http\Controllers\Teacher\HomeController;
@@ -21,27 +22,44 @@ Route::get('logout', function () {
     return redirect()->route('login');
 });
 
-Route::get('/', function () {return view('welcome');})->name('welcome');
-Route::get('/about', function () {return view('about');})->name('about');
-Route::get('/services', function () {return view('services');})->name('services');
-Route::get('/courses', function () {return view('courses');})->name('courses');
-Route::get('/contact', function () {return view('contact');})->name('contact');
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
 
-Route::get('redirect-to-dashboard', function () {
 
-    switch (Auth::user()->role) {
-        case 'admin':
-            return redirect()->route('admin.dashboard');
-        case 'teacher':
-            return redirect()->route('teacher.dashboard');
-        default:
-            return redirect()->route('welcome');
-    }
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+Route::get('/courses', function () {
+    return view('courses');
+})->name('courses');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
-})->middleware('auth');
+
+Route::group(['middleware' => 'verified'], function () {
+    Route::get('redirect-to-dashboard', function () {
+
+        switch (Auth::user()->role) {
+            case 'admin':
+                return redirect()->route('admin.dashboard');
+            case 'teacher':
+                return redirect()->route('teacher.dashboard');
+            default:
+                return redirect()->route('dashboard');
+        }
+
+    });
+    Route::get('/dashboard', [StudentHomeController::class, 'index'])->name('dashboard');
+    Route::get('/exams/{type}', [StudentHomeController::class, 'exams'])->name('exams');
+});
 
 Route::redirect('teacher', '/teacher/dashboard');
-Route::group(['prefix' => 'teacher', 'middleware' => 'teacher', 'as' => 'teacher.'], function () {
+Route::group(['prefix' => 'teacher', 'middleware' => ['verified', 'teacher'], 'as' => 'teacher.'], function () {
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('setting', [HomeController::class, 'setting'])->name('setting');
     Route::post('setting', [HomeController::class, 'changePassword']);
@@ -54,7 +72,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => 'teacher', 'as' => 'teacher
 
 
 Route::redirect('admin', '/admin/dashboard');
-Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['verified', 'admin'], 'as' => 'admin.'], function () {
     Route::get('dashboard', [AdminHomeController::class, 'index'])->name('dashboard');
     Route::get('setting', [AdminHomeController::class, 'setting'])->name('setting');
     Route::post('setting', [AdminHomeController::class, 'changePassword']);

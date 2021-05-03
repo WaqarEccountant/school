@@ -15,6 +15,9 @@
                     <h3>Sign up</h3>
                     <h6>To continue with Us</h6>
                     <form action="{{route('register')}}" method="post" class="signin-form">
+                        @if (request()->has('teacher'))
+                            <input type="hidden" name="role" value="teacher" readonly>
+                        @endif
                         @csrf
                         <div class="form-input">
                             <input type="text" name="name" placeholder="Enter your name" required="" autofocus>

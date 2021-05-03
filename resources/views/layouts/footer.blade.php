@@ -10,11 +10,11 @@
                 <div class="col-lg-2 col-md-6 footer-list-29 footer-2 mt-5">
                     <h6 class="footer-title-29">Explore More</h6>
                     <ul>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="courses.html">Courses</a></li>
-                        <li><a href="landing-single.html">Landing Page</a></li>
-                        <li><a href="signup.html">Apply Now</a></li>
-                        <li><a href="contact.html">Buy Course Online</a></li>
+                        {{--                        <li><a href="gallery.html">Gallery</a></li>--}}
+                        <li><a href="{{route('courses')}}">Courses</a></li>
+                        {{--                        <li><a href="landing-single.html">Landing Page</a></li>--}}
+                        <li><a href="{{route('register')}}">Apply Now</a></li>
+                        <li><a href="{{route('contact')}}">Buy Course Online</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6 footer-list-29 footer-3 mt-5">

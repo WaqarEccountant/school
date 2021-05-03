@@ -13,13 +13,13 @@ $user_id = \Auth::id();
             </div>
         </div>
         <div class="card-body">
-            {{--            <h2>Subjects</h2>--}}
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                     <tr>
                         <th width="10">#</th>
                         <th>Name</th>
+                        <th>Exam Type</th>
                         <th width="100"></th>
                     </tr>
                     </thead>
@@ -30,10 +30,11 @@ $user_id = \Auth::id();
                             <tr>
                                 <td>{{$sr++}}</td>
                                 <td>{{$row->name}}</td>
+                                <td>{{$row->type_name}}</td>
                                 <td>
                                     @if ($row->isOwner($user_id))
                                         <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon" data-toggle="modal" data-target="#editSubject"
-                                            data-name="{{$row->name}}" data-link="{{route('teacher.subjects.update',$row->id)}}" onclick="editRow(this)">
+                                            data-type="{{$row->type_id}}" data-name="{{$row->name}}" data-link="{{route('teacher.subjects.update',$row->id)}}" onclick="editRow(this)">
                                             <i class="now-ui-icons ui-2_settings-90"></i>
                                         </button>
                                         <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon" data-toggle="modal" data-target="#deleteSubject"
@@ -71,6 +72,19 @@ $user_id = \Auth::id();
                                 <strong class="invalid-feedback">{{ $errors->first('name') }}</strong>
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label for="type_id">Exam Type</label>
+                            <select id="type_id" name="type_id" class="form-control {{ $errors->has('type_id') ? "is-invalid" : "" }}">
+                                <option selected disabled>Select</option>
+                                @foreach($types as $row)
+                                    <option value="{{$row->id}}" {{old('type_id') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('type_id'))
+                                <strong class="invalid-feedback">{{ $errors->first('type_id') }}</strong>
+                            @endif
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -100,6 +114,18 @@ $user_id = \Auth::id();
                             <input id="edit-name" type="text" name="name" class="form-control {{ $errors->has('name') ? "is-invalid" : "" }}" value="" placeholder="Name" required/>
                             @if($errors->has('name'))
                                 <strong class="invalid-feedback">{{ $errors->first('name') }}</strong>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-type_id">Exam Type</label>
+                            <select id="edit-type_id" name="type_id" class="form-control {{ $errors->has('type_id') ? "is-invalid" : "" }}">
+                                <option selected disabled>Select</option>
+                                @foreach($types as $row)
+                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('type_id'))
+                                <strong class="invalid-feedback">{{ $errors->first('type_id') }}</strong>
                             @endif
                         </div>
                     </div>
@@ -143,6 +169,7 @@ $user_id = \Auth::id();
         function editRow(e) {
             $('#edit-form').attr('action', $(e).data('link'))
             $('#edit-name').val($(e).data('name'))
+            $('#edit-type_id').val($(e).data('type'))
         }
 
         function deleteRow(e) {

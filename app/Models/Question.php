@@ -11,7 +11,7 @@ class Question extends Model
     use HasFactory;
 
     protected $primaryKey = 'id';
-    protected $fillable = ['body', 'type', 'answer', 'option_id', 'exam_id'];
+    protected $fillable = ['body', 'type', 'answer', 'option_id', 'exam_id', 'q_image', 'a_image'];
 
 
     public static function addUpdate ($data, $exam_id, $id = null) {

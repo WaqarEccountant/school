@@ -47,7 +47,7 @@ $user_id = \Auth::id();
                         <select id="subject_id" name="subject_id" class="form-control {{ $errors->has('subject_id') ? "is-invalid" : "" }}" required>
                             <option selected disabled>Select</option>
                             @foreach($subjects as $row)
-                                <option value="{{$row->id}}" {{old('subject_id') == $row->id ? 'selected' : '' }}>{{$row->name}}</option>
+                                <option value="{{$row->id}}" {{old('subject_id') == $row->id ? 'selected' : '' }}>{{$row->name}} ({{$row->type_name}})</option>
                             @endforeach
                         </select>
                         @if($errors->has('subject_id'))

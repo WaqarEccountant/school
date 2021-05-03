@@ -19,16 +19,16 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="{{is_active('admin.subjects.index')}}">
-                <a href="{{route('admin.subjects.index')}}">
-                    <i class="now-ui-icons text_caps-small"></i>
-                    <p>Subjects</p>
-                </a>
-            </li>
             <li class="{{is_active('admin.exam-types.index')}}">
                 <a href="{{route('admin.exam-types.index')}}">
                     <i class="now-ui-icons text_caps-small"></i>
                     <p>Exam Types</p>
+                </a>
+            </li>
+            <li class="{{is_active('admin.subjects.index')}}">
+                <a href="{{route('admin.subjects.index')}}">
+                    <i class="now-ui-icons text_caps-small"></i>
+                    <p>Subjects</p>
                 </a>
             </li>
             <li class="{{is_active('admin.exams.index')}}">

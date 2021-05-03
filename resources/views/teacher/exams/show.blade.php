@@ -2,7 +2,7 @@
 $title = 'Exam View';
 $user_id = \Auth::id();
 ?>
-@extends('teacher.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <style>
@@ -21,8 +21,8 @@ $user_id = \Auth::id();
         <div class="card-header row">
             <h3 class="col">Exam Details</h3>
             <div class="col-2 text-right">
-                <a href="{{route('teacher.exams.create')}}" class="btn btn-sm btn-success">New</a>
-                <a href="{{route('teacher.exams.edit',$exam->id)}}" class="btn btn-sm btn-success">Edit</a>
+                <a href="{{route('admin.exams.create')}}" class="btn btn-sm btn-success">New</a>
+                <a href="{{route('admin.exams.edit',$exam->id)}}" class="btn btn-sm btn-success">Edit</a>
             </div>
         </div>
         <div class="card-body">
@@ -56,9 +56,11 @@ $user_id = \Auth::id();
     <div class="card">
         <div class="card-header row">
             <h3 class="col">Questions</h3>
-            <div class="col-2 text-right">
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-primary">Add</a>
-            </div>
+            @if (!isset($exam->questions) || count($exam->questions) < 200)
+                <div class="col-2 text-right">
+                    <a href="javascript:void(0);" data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-primary">Add</a>
+                </div>
+            @endif
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -81,7 +83,7 @@ $user_id = \Auth::id();
                                 <td>{{$question->type}}</td>
                                 <td>
                                     <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon" data-toggle="modal" data-target="#deleteModal"
-                                        data-link="{{route('teacher.questions.destroy',$question->id)}}" onclick="deleteRow(this)">
+                                        data-link="{{route('admin.questions.destroy',$question->id)}}" onclick="deleteRow(this)">
                                         <i class="now-ui-icons ui-1_simple-remove"></i>
                                     </button>
                                 </td>
@@ -97,7 +99,7 @@ $user_id = \Auth::id();
 
     <!-- Add Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form method="post" action="{{route('teacher.questions.store')}}">
+        <form method="post" action="{{route('admin.questions.store')}}" enctype="multipart/form-data">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -111,15 +113,21 @@ $user_id = \Auth::id();
                         <input type="hidden" name="exam_id" value="{{$exam->id}}">
                         <div class="form-group">
                             <label for="body">Body</label>
-                            <input id="body" type="text" name="body" class="form-control {{ $errors->has('body') ? "is-invalid" : "" }}" value="{{ old('body') }}" placeholder="Body" required>
+                            <textarea id="body" name="body" class="form-control {{ $errors->has('body') ? "is-invalid" : "" }}" placeholder="Body" required>{{ old('body') }}</textarea>
                             @if($errors->has('body'))
                                 <strong class="invalid-feedback">{{ $errors->first('body') }}</strong>
                             @endif
                         </div>
                         <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="q_image">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="type">Type</label>
                             <select id="type" name="type" class="form-control {{ $errors->has('type') ? "is-invalid" : "" }}" required>
-                                <option selected disabled>Select</option>
+                                <option disabled>Select</option>
                                 <option value="objective" {{old('type') == "objective" ? 'selected' : '' }}>Objective</option>
                                 <option value="subjective" {{old('type') == "subjective" ? 'selected' : '' }}>Subjective</option>
                             </select>
@@ -135,6 +143,12 @@ $user_id = \Auth::id();
                                 @if($errors->has('answer'))
                                     <strong class="invalid-feedback">{{ $errors->first('answer') }}</strong>
                                 @endif
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="a_image">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
                             </div>
                         </div>
                         <div id="objective-div" style="display: none;">

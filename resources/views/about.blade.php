@@ -25,22 +25,22 @@
                         <div class="cwp23-text-cols">
                             <div class="column">
                                 <span class="fa fa-smile-o" aria-hidden="true"></span>
-                                <a href="services.html">Group Seminars</a>
+                                <a href="{{route('services')}}">Group Seminars</a>
                                 <p>consectetur adipisicing elit, sed do eiusmod tempor </p>
                             </div>
                             <div class="column">
                                 <span class="fa fa-graduation-cap" aria-hidden="true"></span>
-                                <a href="services.html">Trending Courses</a>
+                                <a href="{{route('services')}}">Trending Courses</a>
                                 <p>consectetur adipisicing elit, sed do eiusmod tempor </p>
                             </div>
                             <div class="column">
                                 <span class="fa fa-history" aria-hidden="true"></span>
-                                <a href="services.html">Large Library</a>
+                                <a href="{{route('services')}}">Large Library</a>
                                 <p>consectetur adipisicing elit, sed do eiusmod tempor </p>
                             </div>
                             <div class="column">
                                 <span class="fa fa-users" aria-hidden="true"></span>
-                                <a href="services.html">Expert Teachers</a>
+                                <a href="{{route('services')}}">Expert Teachers</a>
                                 <p>consectetur adipisicing elit, sed do eiusmod tempor </p>
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                 <div class="middle-section text-center">
                     <div class="section-width mb-5">
                         <h2 class="mb-5">We are true to ourselves, and commit to always perform at our best.</h2>
-                        <a href="contact.html" class="btn btn-light theme-button py-2 px-5">Contact Us</a>
+                        <a href="{{route('contact')}}" class="btn btn-light theme-button py-2 px-5">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -402,8 +402,8 @@
         <div class="container py-lg-3">
             <h3>Want to Join?</h3>
             <p>Lorem ipsum dolor sit amet elit. Nisi facere reprehenderit!</p>
-            <a href="contact.html" class="btn btn-secondary theme-button">Become a Teacher</a>
-            <a href="signup.html" class="btn btn-outline-secondary theme-button ml-2">Sign Up</a>
+            <a href="{{route('register')}}?teacher=1" class="btn btn-secondary theme-button">Become a Teacher</a>
+            <a href="{{route('register')}}" class="btn btn-outline-secondary theme-button ml-2">Sign Up</a>
         </div>
     </section>
 @endsection
