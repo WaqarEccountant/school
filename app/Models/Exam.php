@@ -71,4 +71,8 @@ class Exam extends Model
     }
 
 
+    public function getFeeDisplayAttribute () {
+        return $this->fee ? $this->fee : "Free";
+    }
+
 }

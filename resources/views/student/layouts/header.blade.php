@@ -1,10 +1,9 @@
-
 <header class="w3l-header">
     <div class="hero-header-11">
         <div class="hero-header-11-content">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light py-md-2 py-0 px-0">
-                    <a class="navbar-brand" href="index.html"><img src="assets/images/logo-icon.png" alt=""/>Skill</a>
+                    <a class="navbar-brand" href="{{route('dashboard')}}"><img src="{{asset("assets/images/logo-icon.png")}}" alt=""/>Skill</a>
                     <!-- if logo is image enable this
                 <a class="navbar-brand" href="#index.html">
                         <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -21,20 +20,19 @@
                                 <a class="nav-link" href="{{route('dashboard')}}">Home <span class="sr-only">(current)</span></a>
                             </li>
 
-{{--                            <li class="nav-item ">--}}
-{{--                                <a class="nav-link" href="{{route('exams')}}"></a>--}}
-{{--                            </li>--}}
                             <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Exams
+                                <a class="nav-link dropdown-toggle {{strpos(URL::current(),'tests')?'active':''}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Tests
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('exams',['job'])}}">Job</a>
-                                    <a class="dropdown-item" href="{{route('exams',['college'])}}">College</a>
-{{--                                    <a class="dropdown-item" href="{{route('exams','university')}}">University</a>--}}
+                                    @foreach($_types as $t)
+                                        <a class="dropdown-item" href="{{route('tests',$t->name)}}">{{ucfirst($t->name)}}</a>
+                                    @endforeach
                                 </div>
                             </li>
-
+                            <li class="nav-item {{is_active('lead_board')}}">
+                                <a class="nav-link" href="{{route('lead_board')}}">LeadBoard</a>
+                            </li>
                         </ul>
                         <div class="form-inline ml-lg-3">
                             <a href="{{route('logout')}}" class="btn btn-primary theme-button">Logout</a>

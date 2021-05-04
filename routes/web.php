@@ -55,7 +55,11 @@ Route::group(['middleware' => 'verified'], function () {
 
     });
     Route::get('/dashboard', [StudentHomeController::class, 'index'])->name('dashboard');
-    Route::get('/exams/{type}', [StudentHomeController::class, 'exams'])->name('exams');
+    Route::get('/lead-board', [StudentHomeController::class, 'leadBoard'])->name('lead_board');
+    Route::get('/tests/{type}', [StudentHomeController::class, 'tests'])->name('tests');
+    Route::get('/tests/attempt/{id}', [StudentHomeController::class, 'testCreate'])->name('tests.attempt');
+    Route::post('/tests/attempt/{id}', [StudentHomeController::class, 'testStore']);
+    Route::get('/tests/result/{result}', [StudentHomeController::class, 'testResult'])->name('tests.result');
 });
 
 Route::redirect('teacher', '/teacher/dashboard');

@@ -151,7 +151,7 @@ $user_id = \Auth::id();
                                 </div>
                             </div>
                         </div>
-                        <div id="objective-div" style="display: none;">
+                        <div id="objective-div" >
 
                             <h5>Options</h5>
                             <div id="options" data-count="1">

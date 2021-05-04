@@ -6,19 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateExamResultsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up () {
         Schema::create('exam_results', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('user_id');
+            $table->decimal('total');
             $table->decimal('marks');
+            $table->decimal('wrong');
+            $table->decimal('missed');
             $table->timestamps();
         });
     }
@@ -28,8 +31,9 @@ class CreateExamResultsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down () {
         Schema::dropIfExists('exam_results');
     }
+
+
 }

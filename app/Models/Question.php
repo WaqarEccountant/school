@@ -13,6 +13,9 @@ class Question extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['body', 'type', 'answer', 'option_id', 'exam_id', 'q_image', 'a_image'];
 
+    public function options () {
+        return $this->hasMany(Option::class);
+    }
 
     public static function addUpdate ($data, $exam_id, $id = null) {
         if ($id) {

@@ -13,6 +13,7 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset("assets/css/style-liberty.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/css/flipclock.css")}}">
 </head>
 <body>
 <!-- header -->
@@ -33,6 +34,7 @@
 <script src="{{asset("assets/js/jquery.countup.js")}}" ></script>
 <script src="{{asset("assets/js/owl.carousel.js")}}" ></script>
 <script src="{{asset("assets/js/smartphoto.js")}}" ></script>
+<script src="{{asset("assets/js/flipclock.min.js")}}" ></script>
 
 @stack('js')
 </body>
