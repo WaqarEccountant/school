@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Skill an Education Category Bootstrap Responsive Website Template - Home </title>
-
+    <link rel="icon" href="{{asset("assets/images/logo-icon.png")}}">
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">

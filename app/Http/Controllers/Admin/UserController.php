@@ -42,7 +42,6 @@ class UserController extends Controller
             'email'    => "required|email|unique:users,email," . $id,
             'mobile'   => "nullable|string",
             'role'     => "required",
-            'password' => "nullable|string|min:6",
         ]);
         $data = [
             'name'   => $request->get('name'),
@@ -50,9 +49,6 @@ class UserController extends Controller
             'mobile' => $request->get('mobile'),
             'role'   => $request->get('role'),
         ];
-        if ($request->get('password') != '') {
-            $data['password'] = bcrypt($request->get('password'));
-        }
         $result = User::where('id', $id)->update($data);
 
         if ($result) {

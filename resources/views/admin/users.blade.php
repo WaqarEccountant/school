@@ -129,7 +129,7 @@ $title = 'Users List';
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Subject</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -169,16 +169,6 @@ $title = 'Users List';
                             @if($errors->has('role'))
                                 <strong class="invalid-feedback">{{ $errors->first('role') }}</strong>
                             @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="edit-password">Password</label>
-                            <input id="edit-password" type="password" name="password" class="form-control {{ $errors->has('password') ? "is-invalid" : "" }}" value="{{ old('password') }}" placeholder="Password">
-                            @if($errors->has('password'))
-                                <strong class="invalid-feedback">{{ $errors->first('password') }}</strong>
-                            @endif
-                            <small id="" class="form-text text-muted">
-                                Leave empty if dont wanna change.
-                            </small>
                         </div>
 
                     </div>

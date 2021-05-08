@@ -83,7 +83,7 @@ class HomeController extends Controller
 
     public function leadBoard () {
         $results = ExamResult::with(['subject', 'user'])->orderBy('marks', 'desc')->take(10)->get();
-     
+
         return view('student.lead-board', compact('results'));
     }
 

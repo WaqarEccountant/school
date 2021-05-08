@@ -3,7 +3,7 @@
         <div class="hero-header-11-content">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light py-md-2 py-0 px-0">
-                    <a class="navbar-brand" href="{{route('dashboard')}}"><img src="{{asset("assets/images/logo-icon.png")}}" alt=""/>Skill</a>
+                    <a class="navbar-brand" href="{{route('dashboard 1')}}"><img src="{{asset("assets/images/logo-icon.png")}}" alt=""/>{{config('app.name')}}</a>
                     <!-- if logo is image enable this
                 <a class="navbar-brand" href="#index.html">
                         <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />

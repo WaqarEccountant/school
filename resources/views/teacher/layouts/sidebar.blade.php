@@ -5,7 +5,7 @@
 
     <div class="logo">
         <a href="{{route('teacher.dashboard')}}" class="simple-text logo-mini">
-            <img src="{{asset("admin-assets/img/favicon.png")}}" alt="">
+            <img src="{{asset("assets/images/logo-icon.png")}}" alt="">
         </a>
         <a href="{{route('teacher.dashboard')}}" class="simple-text logo-normal">
             {{config('app.name')}}
