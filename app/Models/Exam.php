@@ -27,7 +27,7 @@ class Exam extends Model
     }
 
     public function questions () {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class)->with('options');
     }
 
     public function isOwner ($user_id) {
@@ -67,12 +67,13 @@ class Exam extends Model
     }
 
     public static function getWith ($id) {
-        return self::with(['subject', 'type'])->findOrFail($id);
+        return self::with(['subject', 'type', 'questions'])->findOrFail($id);
     }
 
 
     public function getFeeDisplayAttribute () {
         return $this->fee ? $this->fee : "Free";
     }
+
 
 }

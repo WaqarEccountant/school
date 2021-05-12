@@ -16,13 +16,23 @@ $user_id = \Auth::id();
             right:    0;
             color:    var(--danger);
         }
+
+        .image-container {
+            width: 300px;
+        }
+
+        .image-container img {
+            width:  100%;
+            height: auto;
+        }
+
     </style>
     <div class="card">
         <div class="card-header row">
             <h3 class="col">Exam Details</h3>
             <div class="col-2 text-right">
-                <a href="{{route('admin.exams.create')}}" class="btn btn-sm btn-success">New</a>
-                <a href="{{route('admin.exams.edit',$exam->id)}}" class="btn btn-sm btn-success">Edit</a>
+                <a href="{{route('teacher.exams.create')}}" class="btn btn-sm btn-success">New</a>
+                <a href="{{route('teacher.exams.edit',$exam->id)}}" class="btn btn-sm btn-success">Edit</a>
             </div>
         </div>
         <div class="card-body">
@@ -54,7 +64,7 @@ $user_id = \Auth::id();
     <hr>
 
     <div class="card">
-        <div class="card-header row">
+        <div class="card-body row">
             <h3 class="col">Questions</h3>
             @if (!isset($exam->questions) || count($exam->questions) < 200)
                 <div class="col-2 text-right">
@@ -62,44 +72,58 @@ $user_id = \Auth::id();
                 </div>
             @endif
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th width="20">#</th>
-                        <th>Body</th>
-                        <th>Type</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @if (isset($exam->questions) && count($exam->questions))
-                        @php($sr=1)
-                        @foreach($exam->questions as $question)
-                            <tr>
-                                <td>{{$sr++}}</td>
-                                <td>{{$question->body}}</td>
-                                <td>{{$question->type}}</td>
-                                <td>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon" data-toggle="modal" data-target="#deleteModal"
-                                        data-link="{{route('admin.questions.destroy',$question->id)}}" onclick="deleteRow(this)">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
+
+    @if (isset($exam->questions) && count($exam->questions))
+        @php($sr=1)
+        @foreach($exam->questions as $question)
+            <div class="card">
+                <div class="card-header row">
+                    <div class="col">
+                        <h5><b>{{$sr++}}</b> . {{$question->body}}</h5>
+                        @if ($question->q_image != '')
+                            <div class="image-container"><img src="{{asset('images/'.$question->q_image)}}" loading="lazy" class="img" alt=""></div>
+                        @endif
+                    </div>
+                    <div class="col-1">
+                        <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon" data-toggle="modal" data-target="#deleteModal"
+                            data-link="{{route('teacher.questions.destroy',$question->id)}}" onclick="deleteRow(this)">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if($question->type == 'subjective')
+                        <b>Ans.</b>
+                        {{$question->answer}}
+                        @if ($question->a_image != '')
+                            <div class="image-container"><img src="{{asset('images/'.$question->a_image)}}" loading="lazy" class="img" alt=""></div>
+                        @endif
+                    @else
+                        <h5>Options</h5>
+                        <div class="row">
+                            @foreach($question->options as $key => $option)
+                                <div class="col-6">
+                                    <b>{{$key+1}}</b>.
+                                    {{$option->body}}
+                                    @if ($option->id === $question->option_id)
+                                        <span class="fa fa-check-square"></span>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endforeach
+    @endif
+
+
 
 
     <!-- Add Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form method="post" action="{{route('admin.questions.store')}}" enctype="multipart/form-data">
+        <form method="post" action="{{route('teacher.questions.store')}}" enctype="multipart/form-data">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -127,7 +151,6 @@ $user_id = \Auth::id();
                         <div class="form-group">
                             <label for="type">Type</label>
                             <select id="type" name="type" class="form-control {{ $errors->has('type') ? "is-invalid" : "" }}" required>
-                                <option disabled>Select</option>
                                 <option value="objective" {{old('type') == "objective" ? 'selected' : '' }}>Objective</option>
                                 <option value="subjective" {{old('type') == "subjective" ? 'selected' : '' }}>Subjective</option>
                             </select>
@@ -151,7 +174,7 @@ $user_id = \Auth::id();
                                 </div>
                             </div>
                         </div>
-                        <div id="objective-div" style="display: none;">
+                        <div id="objective-div">
 
                             <h5>Options</h5>
                             <div id="options" data-count="1">
